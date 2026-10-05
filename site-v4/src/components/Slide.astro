@@ -1,0 +1,13 @@
+---
+import { u } from '../data/content';
+// A full-bleed "slide": photo background with content composed inside the image, as in the draft.
+// side: where the text sits (left | right | center | bottom). tone: dark | light (light = white fade over the photo).
+const { img, pos = 'center', side = 'left', tone = 'dark', id, min = 'tall', parallax = true, class: cls = '' } = Astro.props;
+---
+<section id={id} class:list={['slide', `side-${side}`, `tone-${tone}`, `min-${min}`, cls]}>
+  <div class:list={['slide-photo', { fixed: parallax }]} style={`background-image:url(${u(`/img/${img}.jpg`)});background-position:${pos}`} aria-hidden="true"></div>
+  <div class="slide-shade" aria-hidden="true"></div>
+  <div class="wrap slide-inner">
+    <slot />
+  </div>
+</section>

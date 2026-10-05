@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Slide from '../components/Slide.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { assess, method, industries, icons, stats, indImg, u } from '../data/content';
+const img = (n: string) => u(`/img/${n}.jpg`);
+---
+<Base>
+  <Hero cta tagline eyebrow="U.S. market entry & growth" title="Strategy. Access. <em>Execution.</em>" lead="Helping international companies enter and expand in the United States, and helping U.S. companies accelerate growth, build strategic partnerships and strengthen operations." />
+
+  <section class="stats" id="intro">
+    <div class="wrap grid g4">
+      {stats.map(s => (
+        <div class="stat reveal"><div class="num"><span data-to={s.n}>0</span></div><div class="lbl">{s.label}</div><div class="sub">{s.sub}</div></div>
+      ))}
+    </div>
+  </section>
+
+  <Slide img="boardroom-full" pos="right center" side="left">
+    <div class="copy reveal">
+      <div class="eyebrow">What we do</div>
+      <h2>Before you invest in U.S. expansion, know where you are going.</h2>
+      <p class="lead">Entering the U.S. market can require significant investment long before the first commercial opportunity is created. USARunway evaluates the opportunity first, helping companies determine where to focus their time, capital and resources before committing to expansion.</p>
+      <ol class="olist">
+        {assess.map((s, i) => <li><span class="n">0{i + 1}</span><div><h3>{s.t}</h3><p>{s.d}</p></div></li>)}
+      </ol>
+      <p class="callout">Designed to reduce unnecessary expansion spend and create a more focused path to opportunity.</p>
+    </div>
+  </Slide>
+
+  <Slide img="capitol" pos="center top" side="bottom">
+    <div class="reveal">
+      <div class="eyebrow">The USARunway method</div>
+      <h2 style="max-width:16em">From understanding the opportunity to executing the U.S. pathway.</h2>
+      <ol class="mrow">
+        {method.map((m, i) => <li><span class="n">0{i + 1}</span><h3>{m.t}</h3><p>{m.d}</p></li>)}
+      </ol>
+      <p class="callout" style="margin-top:2.4rem">We move forward only when we believe we can create meaningful value. Our process begins with internal due diligence. If we do not believe our expertise, capabilities and network can meaningfully support the opportunity, we say so.</p>
+    </div>
+  </Slide>
+
+  <section class="tiles" aria-label="Industries">
+    {industries.map((i, k) => (
+      <a class="tile reveal" href={u(`/industries/#${i.id}`)}>
+        <img src={img(indImg[k])} alt="" loading="lazy" width="800" height="552" />
+        <div class="ico"><Icon name={icons.industries[k]} size={26} /></div>
+        <h3>{i.name}</h3>
+        <p>{i.lead}</p>
+        <span class="more">Explore <Icon name="arrow" size={14} /></span>
+      </a>
+    ))}
+  </section>
+
+  <Slide img="group" pos="center 35%" side="right">
+    <div class="copy glass reveal">
+      <div class="eyebrow">Leadership</div>
+      <h2>Experience behind the strategy.</h2>
+      <p class="lead" style="font-size:1.02em">Senior expertise. One integrated U.S. team. USARunway brings together senior executive, operational and sector expertise across healthcare, defense, aerospace, cybersecurity, supply chain and advanced technology.</p>
+      <a class="btn" href={u("/leadership/")}>Meet our team <span>→</span></a>
+    </div>
+  </Slide>
+
+  <section class="section cgi">
+    <div class="wrap split" style="align-items:center">
+      <div class="reveal">
+        <div class="eyebrow">Commitment to action</div>
+        <h2>Relationships that reach the global stage.</h2>
+        <p class="lead" style="font-size:1.05em">USARunway's leadership brings long-standing networks across healthcare, business, government and the Texas innovation ecosystem, from boardrooms to international forums such as the Clinton Global Initiative.</p>
+      </div>
+      <figure class="frame cgi-photo reveal"><img src={img('event-cgi')} alt="Clinton Global Initiative Commitment to Action certificate presentation with former U.S. President Bill Clinton" loading="lazy" width="1000" height="666" /><figcaption>Clinton Global Initiative · Commitment to Action</figcaption></figure>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

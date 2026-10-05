@@ -1,0 +1,106 @@
+---
+import '../styles/global.css';
+import '../styles/v2.css';
+import '../styles/v3.css';
+import '../styles/v4.css';
+import { nav, contact, u } from '../data/content';
+const { title, description = 'USARunway helps international companies enter and expand in the United States, and helps U.S. companies accelerate growth, build strategic partnerships and strengthen operations.' } = Astro.props;
+const path = Astro.url.pathname;
+const full = title ? `${title} | USARunway` : 'USARunway | Strategy. Access. Execution.';
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{full}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={full} />
+  <meta property="og:description" content={description} />
+  <meta name="theme-color" content="#0A2D5E" />
+  <link rel="icon" href={u("/favicon.svg")} type="image/svg+xml" />
+  <link rel="icon" href={u("/favicon.ico")} sizes="48x48" />
+  <link rel="icon" href={u("/favicon-32.png")} type="image/png" sizes="32x32" />
+  <link rel="apple-touch-icon" href={u("/apple-touch-icon.png")} />
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header" id="header">
+    <div class="wrap bar">
+      <a class="logo" href={u("/")} aria-label="USARunway home">
+        <img class="l-white" src={u("/brand/logo-white.png")} alt="USARunway" width="266" height="44" />
+        <img class="l-navy" src={u("/brand/logo-navy.png")} alt="" width="266" height="44" />
+      </a>
+      <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav id="nav" aria-label="Main">
+        <ul>
+          {nav.map(n => <li><a href={u(n.href)} aria-current={path.startsWith(u(n.href)) ? 'page' : undefined}>{n.label}</a></li>)}
+          <li><a class="btn" href={u("/contact/")}>Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main"><slot /></main>
+  <footer>
+    <div class="wrap">
+      <div class="cols">
+        <div>
+          <img src={u("/brand/logo-white.png")} alt="USARunway" width="278" height="46" />
+          <p>Strategy. Access. Execution.<br />Bridging markets. Building opportunities.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            {nav.map(n => <li><a href={u(n.href)}>{n.label}</a></li>)}
+            <li><a href={u("/contact/")}>Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <address style="font-style:normal">
+            {contact.address.map(l => <div>{l}</div>)}
+            <div style="margin-top:.6rem"><a href={`mailto:${contact.email}`}>{contact.email}</a></div>
+          </address>
+        </div>
+      </div>
+      <div class="legal"><span>© {new Date().getFullYear()} USARunway Inc. All rights reserved.</span><span>USARunway™</span></div>
+    </div>
+  </footer>
+  <script>
+    const h = document.getElementById('header')!;
+    const hasHero = !!document.querySelector('.hero');
+    const bar = document.getElementById('progress')!;
+    const upd = () => {
+      h.classList.toggle('solid', !hasHero || scrollY > 40 || document.getElementById('nav')!.classList.contains('open'));
+      const m = document.documentElement.scrollHeight - innerHeight;
+      bar.style.transform = 'scaleX(' + (m > 0 ? scrollY / m : 0) + ')';
+      document.documentElement.style.setProperty('--sy', String(Math.min(scrollY, 900)));
+    };
+    upd(); addEventListener('scroll', upd, { passive: true });
+    const b = document.querySelector('.menu-btn')!, n = document.getElementById('nav')!;
+    b.addEventListener('click', () => { const o = n.classList.toggle('open'); b.setAttribute('aria-expanded', String(o)); upd(); });
+    n.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { n.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); upd(); }));
+    document.querySelectorAll('.reveal').forEach((el, i) => (el as HTMLElement).style.transitionDelay = ((i % 4) * 90) + 'ms');
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    // animated counters
+    const co = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return; co.unobserve(e.target);
+      const el = e.target as HTMLElement, to = +el.dataset.to!; const t0 = performance.now();
+      const tick = (t: number) => { const p = Math.min((t - t0) / 1200, 1); el.textContent = String(Math.round(to * (1 - Math.pow(1 - p, 3)))); if (p < 1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    }), { threshold: .6 });
+    document.querySelectorAll('[data-to]').forEach(el => co.observe(el));
+    // method tabs
+    document.querySelectorAll('.mtabs').forEach(root => {
+      const tabs = [...root.querySelectorAll<HTMLElement>('[role=tab]')], panels = [...root.querySelectorAll<HTMLElement>('[role=tabpanel]')];
+      const sel = (i: number) => { tabs.forEach((t, k) => { t.setAttribute('aria-selected', String(k === i)); t.tabIndex = k === i ? 0 : -1; }); panels.forEach((p, k) => p.hidden = k !== i); (root as HTMLElement).style.setProperty('--i', String(i)); };
+      tabs.forEach((t, i) => { t.addEventListener('click', () => sel(i)); t.addEventListener('keydown', (e: KeyboardEvent) => { if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { sel((i + 1) % tabs.length); tabs[(i + 1) % tabs.length].focus(); } if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { sel((i + tabs.length - 1) % tabs.length); tabs[(i + tabs.length - 1) % tabs.length].focus(); } }); });
+      sel(0);
+    });
+  </script>
+</body>
+</html>
