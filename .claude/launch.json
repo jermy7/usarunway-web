@@ -70,6 +70,20 @@
         "4325"
       ],
       "port": 4325
+    },
+    {
+      "name": "usarunway-site-v6",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "site-v6",
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "4326"
+      ],
+      "port": 4326
     }
   ]
 }

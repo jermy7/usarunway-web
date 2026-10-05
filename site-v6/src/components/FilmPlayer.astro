@@ -1,0 +1,15 @@
+---
+import { u } from '../data/content';
+// Click-to-play brand film (has its own on-screen text, music and QR code, so it is not used as a background).
+const { src, poster, title, caption } = Astro.props;
+---
+<figure class="film reveal">
+  <div class="film-frame">
+    <video preload="none" playsinline controls={false} poster={u(`/video/${poster}.jpg`)} data-src={u(`/video/${src}.mp4`)} aria-label={title}></video>
+    <button class="film-play" type="button" aria-label={`Play video: ${title}`}>
+      <span class="ring"></span>
+      <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
