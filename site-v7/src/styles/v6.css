@@ -42,3 +42,18 @@
   .site-header.solid .menu-btn{padding:10px}
   .menu-btn{min-width:48px;min-height:48px}
 }
+
+/* v7: method steps as a vertical timeline on tablet/mobile (dots no longer collide with text) */
+@media(max-width:1000px){
+  .mrow{grid-template-columns:1fr;border-top:0;border-left:1px solid rgba(255,255,255,.35);margin-left:5px;margin-top:2rem}
+  .mrow li{padding:0 0 1.6rem 1.8rem}
+  .mrow li:last-child{padding-bottom:0}
+  .mrow li::before{top:.8rem;left:-5px}
+  .mrow.brief li{padding-bottom:1.1rem}
+  .mrow .n{display:inline-block;margin-right:.7rem}
+  .mrow h3{display:inline-block;margin:0}
+  .mrow li p{margin:.4rem 0 0}
+}
+@media(max-width:640px){.person .avatar{aspect-ratio:4/3}.person .avatar.photo img{object-position:center 15%}}
+.eyebrow{line-height:1.55}
+@media(max-width:560px){.quad{grid-template-columns:1fr!important}}
