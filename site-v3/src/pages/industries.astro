@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { industries, icons, indHero, u } from '../data/content';
+const img = (n: string) => u(`/img/${n}.jpg`);
+const alts = ['Healthcare professionals reviewing a patient case', 'Soldier in front of a helicopter on an airfield', 'Shipping port and logistics terminal at dusk'];
+---
+<Base title="Industries">
+  <Hero short img="group" pos="center 40%" eyebrow="Industries" title="Where experience meets opportunity." lead="Sector-specific expertise for navigating complex U.S. markets." />
+
+  <div class="indnav">
+    <div class="wrap">{industries.map((i, k) => <a href={`#${i.id}`}><Icon name={icons.industries[k]} size={18} />{i.name}</a>)}</div>
+  </div>
+
+  {industries.map((i, k) => (
+    <section class:list={['section', 'ind-sec', { mist: k % 2 === 1 }]} id={i.id}>
+      <div class:list={['wrap', 'split', { flip: k % 2 === 1 }]}>
+        <div class="frame ind-photo reveal">
+          <img src={img(indHero[k])} alt={alts[k]} loading="lazy" width="1600" height="1000" />
+          <span class="badge"><Icon name={icons.industries[k]} size={22} />{i.n}</span>
+        </div>
+        <div class="reveal">
+          <div class="eyebrow">{i.name}</div>
+          <h2>{i.title}</h2>
+          <p class="lead">{i.lead}</p>
+          {i.body.map(p => <p>{p}</p>)}
+          {i.chips.length > 0 && <div class="chips">{i.chips.map(c => <div class="chip"><b>{c.t}</b><span>{c.d}</span></div>)}</div>}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section mist">
+    <div class="wrap split" style="align-items:center">
+      <div class="reveal">
+        <div class="eyebrow">Supply chain & manufacturing</div>
+        <h2>From the factory floor to the enterprise.</h2>
+        <p class="lead" style="font-size:1.05em">We help build the connections that move operations forward: connecting technology, partners and operations needs across the industrial ecosystem.</p>
+      </div>
+      <div class="frame reveal"><img src={img('warehouse')} alt="Warehouse, port and enterprise technology collage" loading="lazy" width="1920" height="1080" /></div>
+    </div>
+  </section>
+  <CtaBand />
+</Base>

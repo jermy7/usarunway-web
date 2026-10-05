@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { method, pillars, icons, u } from '../data/content';
+const img = (n: string) => u(`/img/${n}.jpg`);
+---
+<Base title="Our approach">
+  <Hero short img="event-panel" eyebrow="Our approach" title="What clients can expect." lead="A focused, practical and collaborative engagement designed to create real opportunities and lasting value in the U.S. market." />
+
+  <section class="section">
+    <div class="wrap split wide-left">
+      <div>
+        <div class="section-head reveal">
+          <div class="eyebrow">The USARunway method</div>
+          <h2>From understanding the opportunity to executing the U.S. pathway.</h2>
+        </div>
+        <ol class="vtime">
+          {method.map((m, i) => (
+            <li class="reveal"><div class="vdot"><Icon name={icons.method[i]} size={24} /></div><div class="vbody"><span class="step-no">Step 0{i + 1}</span><h3>{m.t}</h3><p>{m.d}</p></div></li>
+          ))}
+        </ol>
+      </div>
+      <div class="frame tall sticky reveal"><img src={img('capitol')} alt="Business leaders overlooking the U.S. Capitol at dusk" loading="lazy" width="1920" height="1080" /></div>
+    </div>
+  </section>
+
+  <section class="section mist">
+    <div class="wrap">
+      <div class="section-head center reveal"><div class="eyebrow">What you get</div><h2>Four commitments in every engagement.</h2></div>
+      <div class="grid g4 feature-grid">
+        {pillars.map((p, i) => <div class="feature reveal"><div class="ico"><Icon name={icons.pillars[i]} size={30} /></div><h3>{p.t}</h3><p>{p.d}</p></div>)}
+      </div>
+      <div class="gallery strip reveal" style="margin-top:clamp(36px,5vw,64px)">
+        <figure><img src={img('event-roundtable')} alt="Executives in conversation at a luncheon" loading="lazy" width="1400" height="900" /></figure>
+        <figure><img src={img('meeting-room')} alt="Conference room set for a large meeting" loading="lazy" width="1600" height="900" /></figure>
+        <figure><img src={img('event-talk')} alt="Recognition ceremony at a business event" loading="lazy" width="1400" height="1050" /></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark statement qualify photo-band" style={`--bg:url(${img('boardroom')})`}>
+    <div class="wrap reveal">
+      <h2>We don't measure progress by the number of introductions.</h2>
+      <p>We measure it by whether the right opportunities move forward.</p>
+    </div>
+  </section>
+  <CtaBand />
+</Base>
