@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Ticker from '../components/Ticker.astro';
+import Icon from '../components/Icon.astro';
+import { assess, method, industries, leaders, advisors, icons, stats, u } from '../data/content';
+const everyone = [...leaders, ...advisors];
+const hues = [210, 350, 215, 340, 205, 355, 220, 345, 212];
+const initials = (n: string) => n.replace(/,.*/, '').replace(/\(.*?\)|"/g, '').split(/\s+/).filter((w) => /^[A-Z]/.test(w)).map((w) => w[0]).slice(0, 2).join('');
+---
+<Base>
+  <Hero map cta tagline eyebrow="U.S. market entry & growth" title="Strategy. Access. <em>Execution.</em>" lead="Helping international companies enter and expand in the United States, and helping U.S. companies accelerate growth, build strategic partnerships and strengthen operations." />
+  <Ticker />
+
+  <section class="stats" id="intro">
+    <div class="wrap grid g4">
+      {stats.map(s => (
+        <div class="stat reveal"><div class="num"><span data-to={s.n}>0</span></div><div class="lbl">{s.label}</div><div class="sub">{s.sub}</div></div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <div class="eyebrow">What we do</div>
+        <h2>Before you invest in U.S. expansion, know where you are going.</h2>
+        <p class="lead">Entering the U.S. market can require significant investment long before the first commercial opportunity is created. USARunway evaluates the opportunity first, helping companies determine where to focus their time, capital and resources before committing to expansion.</p>
+      </div>
+      <div class="grid g3 feature-grid">
+        {assess.map((s, i) => (
+          <div class="feature reveal">
+            <span class="ghost-num">0{i + 1}</span>
+            <div class="ico"><Icon name={icons.assess[i]} size={30} /></div>
+            <h3>{s.t}</h3><p>{s.d}</p>
+          </div>
+        ))}
+      </div>
+      <p class="rule-quote center-q reveal">Designed to reduce unnecessary expansion spend and create a more focused path to opportunity.</p>
+    </div>
+  </section>
+
+  <section class="section method-sec">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">The USARunway method</div>
+        <h2>From understanding the opportunity to executing the U.S. pathway.</h2>
+      </div>
+      <div class="mtabs reveal">
+        <div class="mlist" role="tablist" aria-orientation="vertical">
+          {method.map((m, i) => (
+            <button role="tab" id={`t${i}`} aria-controls={`p${i}`}><span class="mnum">0{i + 1}</span><Icon name={icons.method[i]} size={22} /><span>{m.t}</span></button>
+          ))}
+          <i class="mbar" aria-hidden="true"></i>
+        </div>
+        <div class="mpanels">
+          {method.map((m, i) => (
+            <div role="tabpanel" id={`p${i}`} aria-labelledby={`t${i}`}>
+              <div class="mvisual" aria-hidden="true">
+                <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+                <div class="core"><Icon name={icons.method[i]} size={56} /></div>
+              </div>
+              <div class="mtext"><span class="step-no">Step 0{i + 1} / 05</span><h3>{m.t}</h3><p>{m.d}</p></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark statement qualify">
+    <div class="wrap reveal">
+      <div class="eyebrow" style="justify-content:center">Our promise</div>
+      <h2>We move forward only when we believe we can create meaningful value.</h2>
+      <p>Our process begins with internal due diligence. If we do not believe our expertise, capabilities and network can meaningfully support the opportunity, we say so.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Industries</div>
+        <h2>Where experience meets opportunity.</h2>
+        <p class="lead">Sector-specific expertise for navigating complex U.S. markets.</p>
+      </div>
+      <div class="grid g3 ind-grid">
+        {industries.map((i, k) => (
+          <a class={`ind-card reveal ind-${k}`} href={u(`/industries/#${i.id}`)}>
+            <div class="pattern" aria-hidden="true"></div>
+            <div class="ico big"><Icon name={icons.industries[k]} size={40} /></div>
+            <span class="num">{i.n}</span>
+            <h3>{i.name}</h3><p>{i.lead}</p>
+            <span class="more">Explore <Icon name="arrow" size={16} /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section mist team-sec">
+    <div class="wrap split wide-left" style="align-items:center">
+      <div class="avatars reveal" aria-hidden="true">
+        {everyone.map((p, i) => <span class={`av a${i}`} style={`--h:${hues[i]}`}>{initials(p.name)}</span>)}
+        <span class="av-note">New team photo to be provided</span>
+      </div>
+      <div class="reveal">
+        <div class="eyebrow">Leadership</div>
+        <h2>Experience behind the strategy.</h2>
+        <p class="lead" style="font-size:1.05em">USARunway brings together senior executive, operational and sector expertise across healthcare, defense, aerospace, cybersecurity, supply chain and advanced technology. Senior expertise. One integrated U.S. team.</p>
+        <a class="btn" href={u("/leadership/")}>Meet our team <span>→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

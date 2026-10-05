@@ -1,0 +1,29 @@
+---
+import { u } from '../data/content';
+import WorldMap from './WorldMap.astro';
+const { eyebrow, title, lead, short = false, cta = false, tagline = false, map = false } = Astro.props;
+---
+<section class:list={['hero', { short }]}>
+  <div class="aurora" aria-hidden="true"></div>
+  {map && <div class="hero-map"><WorldMap /></div>}
+  <svg class="runway" viewBox="0 0 800 600" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="rg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+      <linearGradient id="rr" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff1f3d" stop-opacity=".7"/><stop offset="1" stop-color="#ff1f3d" stop-opacity="0"/></linearGradient>
+    </defs>
+    <g class="stripes">
+      <polygon points="140,600 800,600 800,0" fill="url(#rg)"/>
+      <polygon points="330,600 470,600 800,120 800,40" fill="url(#rr)"/>
+      <polygon points="520,600 600,600 800,300 800,250" fill="url(#rg)"/>
+      <polygon points="640,600 700,600 800,470 800,440" fill="url(#rr)" opacity=".7"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    {eyebrow && <div class="eyebrow">{eyebrow}</div>}
+    <h1><Fragment set:html={title} /></h1>
+    {lead && <p class="lead">{lead}</p>}
+    {cta && <div class="actions"><a class="btn" href={u("/contact/")}>Start a conversation <span>→</span></a><a class="btn ghost" href={u("/what-we-do/")}>What we do</a></div>}
+    {tagline && <div class="tagline"><span>Market access</span><i>★</i><span>Strategic partnerships</span><i>★</i><span>U.S. operations</span></div>}
+  </div>
+  {cta && <a class="scroll-cue" href="#intro" aria-label="Scroll down"><span></span></a>}
+</section>

@@ -1,0 +1,25 @@
+---
+import map from '../data/map.json';
+const { dots, cities, w, h } = map as any;
+const [ax, ay] = cities.austin;
+const arcs = Object.entries(cities.from).map(([name, p]: any, i) => {
+  const [x, y] = p;
+  const mx = (x + ax) / 2, my = Math.min(y, ay) - 70 - Math.abs(x - ax) * 0.12;
+  return { name, x, y, d: `M${x},${y} Q${mx},${my} ${ax},${ay}`, delay: (i * 0.9).toFixed(1) };
+});
+---
+<svg class="worldmap" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <g class="dots">{dots.map(([x, y]: number[]) => <circle cx={x} cy={y} r="1.9" />)}</g>
+  <g class="arcs">
+    {arcs.map((a) => (
+      <>
+        <path class="arc" d={a.d} style={`animation-delay:${a.delay}s`} />
+        <circle class="src" cx={a.x} cy={a.y} r="3.4" />
+        <circle class="traveler" r="3"><animateMotion dur="5.5s" begin={`${a.delay}s`} repeatCount="indefinite" path={a.d} /></circle>
+      </>
+    ))}
+  </g>
+  <g class="hub" transform={`translate(${ax} ${ay})`}>
+    <circle class="pulse" r="6" /><circle class="pulse p2" r="6" /><circle class="core" r="6.5" />
+  </g>
+</svg>

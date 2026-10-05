@@ -1,0 +1,14 @@
+---
+const { name, role, bio, tags = [], hue = 0 } = Astro.props;
+const initials = name.replace(/,.*/, '').replace(/\(.*?\)|"/g, '').split(/\s+/).filter((w) => /^[A-Z]/.test(w)).map((w) => w[0]).slice(0, 2).join('');
+---
+<article class="person reveal">
+  <div class="avatar" style={`--h:${hue}`}>
+    <svg viewBox="0 0 100 125" aria-hidden="true"><circle cx="50" cy="46" r="19"/><path d="M12 125c0-26 17-42 38-42s38 16 38 42z"/></svg>
+    <span class="initials">{initials}</span>
+  </div>
+  <h3>{name}</h3>
+  <div class="role">{role}</div>
+  {tags.length > 0 && <div class="tags">{tags.map((t: string) => <span>{t}</span>)}</div>}
+  <details><summary>Biography</summary><p>{bio}</p></details>
+</article>

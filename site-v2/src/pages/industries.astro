@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { industries, icons } from '../data/content';
+---
+<Base title="Industries">
+  <Hero short eyebrow="Industries" title="Where experience meets opportunity." lead="Sector-specific expertise for navigating complex U.S. markets." />
+
+  <div class="indnav">
+    <div class="wrap">{industries.map((i, k) => <a href={`#${i.id}`}><Icon name={icons.industries[k]} size={18} />{i.name}</a>)}</div>
+  </div>
+
+  {industries.map((i, k) => (
+    <section class:list={['section', 'ind-sec', `ind-${k}`, { mist: k % 2 === 1 }]} id={i.id}>
+      <div class:list={['wrap', 'split', { flip: k % 2 === 1 }]}>
+        <div class="ind-visual reveal" aria-hidden="true">
+          <div class="pattern"></div>
+          <div class="ico big"><Icon name={icons.industries[k]} size={72} /></div>
+          <span class="num">{i.n}</span>
+        </div>
+        <div class="reveal">
+          <div class="eyebrow">{i.name}</div>
+          <h2>{i.title}</h2>
+          <p class="lead">{i.lead}</p>
+          {i.body.map(p => <p>{p}</p>)}
+          {i.chips.length > 0 && <div class="chips">{i.chips.map(c => <div class="chip"><b>{c.t}</b><span>{c.d}</span></div>)}</div>}
+        </div>
+      </div>
+    </section>
+  ))}
+  <CtaBand />
+</Base>

@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { assess, partnership, icons } from '../data/content';
+---
+<Base title="What we do">
+  <Hero short eyebrow="What we do" title="Before you invest in U.S. expansion, know where you are going." lead="Entering the U.S. market can require significant investment long before the first commercial opportunity is created. USARunway evaluates the opportunity first." />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <div class="eyebrow">Evaluate first. Commit second.</div>
+        <h2>Three steps to a more focused path.</h2>
+        <p class="lead">We help companies determine where to focus their time, capital and resources before committing to expansion.</p>
+      </div>
+      <div class="flow reveal">
+        {assess.map((s, i) => (
+          <>
+            <div class="flow-step"><div class="ico big"><Icon name={icons.assess[i]} size={34} /></div><span class="step-no">0{i + 1}</span><h3>{s.t}</h3><p>{s.d}</p></div>
+            {i < assess.length - 1 && <div class="flow-arrow" aria-hidden="true"><Icon name="arrow" size={28} /></div>}
+          </>
+        ))}
+      </div>
+      <p class="rule-quote center-q reveal">Designed to reduce unnecessary expansion spend and create a more focused path to opportunity.</p>
+    </div>
+  </section>
+
+  <section class="section mist">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">A partnership built for execution</div>
+        <h2>Real relationships. Real opportunities. Meaningful execution.</h2>
+        <p class="lead">We work as an extension of our clients' teams, combining strategic guidance, U.S.-based representation and trusted relationships to move opportunities forward.</p>
+      </div>
+      <div class="grid g3 feature-grid">
+        {partnership.map((p, i) => <div class="feature reveal"><span class="ghost-num">0{i + 1}</span><div class="ico"><Icon name={icons.partnership[i]} size={30} /></div><h3>{p.t}</h3><p>{p.d}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="dark statement qualify">
+    <div class="wrap reveal">
+      <h2>Your U.S. team before you build your U.S. team.</h2>
+      <p>Strategy. Access. Execution.</p>
+    </div>
+  </section>
+  <CtaBand />
+</Base>

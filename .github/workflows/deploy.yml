@@ -19,14 +19,21 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: site/package-lock.json
-      - run: npm ci
+          cache-dependency-path: |
+            site/package-lock.json
+            site-v2/package-lock.json
+      - run: npm ci && npm run build
         working-directory: site
-      - run: npm run build
-        working-directory: site
+      - run: npm ci && npm run build
+        working-directory: site-v2
+      - name: Assemble pages (v1 at root, v2 at /v2)
+        run: |
+          mkdir -p _pages/v2
+          cp -r site/dist/. _pages/
+          cp -r site-v2/dist/. _pages/v2/
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site/dist
+          path: _pages
   deploy:
     needs: build
     runs-on: ubuntu-latest

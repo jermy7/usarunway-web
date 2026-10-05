@@ -1,0 +1,8 @@
+---
+const items = ['Healthcare', 'Defense', 'Aerospace', 'Cybersecurity', 'Supply chain', 'Advanced technology', 'Market access', 'Strategic partnerships', 'U.S. operations'];
+---
+<div class="ticker" aria-hidden="true">
+  <div class="track">
+    {[0, 1].map(() => <div class="set">{items.map((t) => <span>{t}<i>★</i></span>)}</div>)}
+  </div>
+</div>
