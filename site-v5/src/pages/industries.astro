@@ -1,0 +1,106 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Slide from '../components/Slide.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { industries, icons, indImg, readiness, u } from '../data/content';
+const img = (n: string) => u(`/img/${n}.jpg`);
+const [hc, df, sc] = industries;
+---
+<Base title="Industries">
+  <Hero short img="hero-austin" pos="center 60%" eyebrow="Industries" title="Where experience meets opportunity." lead="Sector-specific expertise for navigating complex U.S. markets." />
+
+  <section class="tiles" aria-label="Industries">
+    {industries.map((i, k) => (
+      <a class="tile reveal" href={`#${i.id}`}>
+        <img src={img(indImg[k])} alt="" loading="lazy" width="800" height="552" />
+        <div class="ico"><Icon name={icons.industries[k]} size={26} /></div>
+        <h3>{i.name}</h3><p>{i.lead}</p>
+        <span class="more">Explore <Icon name="arrow" size={14} /></span>
+      </a>
+    ))}
+  </section>
+
+  <!-- Healthcare -->
+  <Slide id={hc.id} img="group" pos="center 35%" side="left">
+    <div class="copy reveal">
+      <div class="eyebrow">Industries · {hc.name}</div>
+      <h2>{hc.title}</h2>
+      <p class="lead">{hc.lead}</p>
+    </div>
+  </Slide>
+  <Slide img="health-doctors" pos="right center" side="left" tone="light">
+    <div class="copy reveal">
+      <div class="eyebrow">Navigating U.S. healthcare</div>
+      <h2>Innovation alone doesn't drive adoption.</h2>
+      <p class="lead">{hc.body[0].replace(/^[^.]*.s*/, "")}</p>
+      <p>{hc.body[1]}</p>
+      <ul class="quad" style="grid-template-columns:1fr 1fr">
+        {readiness.healthcare.map(r => <li><Icon name={r.i} size={26} /><h3>{r.t}</h3><p>{r.d}</p></li>)}
+      </ul>
+    </div>
+  </Slide>
+
+  <!-- Defense -->
+  <Slide id={df.id} img="soldier" pos="right center" side="left">
+    <div class="copy reveal">
+      <div class="eyebrow">Industries · {df.name}</div>
+      <h2>{df.title}</h2>
+      <p class="lead">{df.lead}</p>
+    </div>
+  </Slide>
+  <Slide img="defense-meeting" pos="right center" side="left">
+    <div class="copy reveal">
+      <div class="eyebrow">U.S. defense readiness</div>
+      <h2>Technology alone doesn't drive adoption.</h2>
+      <p>{df.body[0].replace(/^[^.]*.s*/, "")}</p>
+      <ul class="quad" style="grid-template-columns:1fr 1fr">
+        {readiness.defense.map(r => <li><Icon name={r.i} size={26} /><h3>{r.t}</h3><p>{r.d}</p></li>)}
+      </ul>
+    </div>
+  </Slide>
+  <Slide img="osh-scene" pos="right center" side="left">
+    <div class="copy reveal">
+      <div class="eyebrow">Defense experience</div>
+      <h2>Experience built around mission reality.</h2>
+      <p>{df.body[1]}</p>
+      <div class="duo">
+        {df.chips.map((c, i) => (
+          <figure><img src={img(i === 0 ? 'p-ron' : 'p-dolbow')} alt={i === 0 ? 'Portrait of Ron Farris' : 'Portrait of Phil Dolbow'} loading="lazy" width="640" height="640" /><figcaption><b>{i === 0 ? 'Ron Farris' : 'Phil Dolbow'}</b><small>{c.t}</small><p>{c.d}</p></figcaption></figure>
+        ))}
+      </div>
+      <p class="callout">Experience matters when technology has to perform in the real world.</p>
+    </div>
+  </Slide>
+
+  <!-- Supply chain -->
+  <Slide id={sc.id} img="port" pos="right center" side="left">
+    <div class="copy reveal">
+      <div class="eyebrow">Industries · {sc.name}</div>
+      <h2>{sc.title}</h2>
+      <p class="lead">{sc.lead} {sc.body[0]}</p>
+    </div>
+  </Slide>
+  <Slide img="factory" pos="right center" side="left" tone="light">
+    <div class="copy reveal">
+      <div class="eyebrow">Supply chain & manufacturing</div>
+      <h2>Growth requires more than market access.</h2>
+      <p class="lead">{sc.body[1]}</p>
+      <ul class="quad" style="grid-template-columns:1fr 1fr">
+        {readiness.supply.map(r => <li><Icon name={r.i} size={26} /><h3>{r.t}</h3><p>{r.d}</p></li>)}
+      </ul>
+    </div>
+  </Slide>
+  <Slide img="warehouse" pos="center" side="bottom">
+    <div class="reveal">
+      <div class="eyebrow">Where strategy meets operations</div>
+      <h2 style="max-width:16em">From the factory floor to the enterprise.</h2>
+      <p class="lead" style="max-width:36em">Connecting technology, partners and operations needs across the industrial ecosystem.</p>
+      <ul class="quad">
+        {sc.chips.map(c => <li><h3>{c.t}</h3><p>{c.d}</p></li>)}
+      </ul>
+    </div>
+  </Slide>
+  <CtaBand />
+</Base>

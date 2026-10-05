@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Slide from '../components/Slide.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { method, pillars, icons, u } from '../data/content';
+const img = (n: string) => u(`/img/${n}.jpg`);
+---
+<Base title="Our approach">
+  <Hero short img="event-panel" eyebrow="Our approach" title="What clients can expect." lead="A focused, practical and collaborative engagement designed to create real opportunities and lasting value in the U.S. market." />
+
+  <Slide img="event-panel" pos="center" side="bottom">
+    <div class="reveal">
+      <div class="eyebrow">What you get</div>
+      <h2 style="max-width:16em">Four commitments in every engagement.</h2>
+      <ul class="quad">
+        {pillars.map((p, i) => <li><Icon name={icons.pillars[i]} size={30} /><h3>{p.t}</h3><p>{p.d}</p></li>)}
+      </ul>
+      <p class="callout" style="margin-top:2.6rem">We don't measure progress by the number of introductions. We measure it by whether the right opportunities move forward.</p>
+    </div>
+  </Slide>
+
+  <Slide img="capitol" pos="center top" side="bottom">
+    <div class="reveal">
+      <div class="eyebrow">The USARunway method</div>
+      <h2 style="max-width:16em">From understanding the opportunity to executing the U.S. pathway.</h2>
+      <ol class="mrow">
+        {method.map((m, i) => <li><span class="n">0{i + 1}</span><h3>{m.t}</h3><p>{m.d}</p></li>)}
+      </ol>
+    </div>
+  </Slide>
+
+  <section class="section mist">
+    <div class="wrap">
+      <div class="gallery strip reveal">
+        <figure><img src={img('event-roundtable')} alt="Executives in conversation at a luncheon" loading="lazy" width="1400" height="900" /></figure>
+        <figure><img src={img('meeting-room')} alt="Conference room set for a large meeting" loading="lazy" width="1600" height="900" /></figure>
+        <figure><img src={img('event-cgi')} alt="Clinton Global Initiative Commitment to Action certificate presentation" loading="lazy" width="1000" height="666" /></figure>
+      </div>
+    </div>
+  </section>
+  <CtaBand />
+</Base>
