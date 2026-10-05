@@ -109,3 +109,14 @@
 .slide-photo,.slide-photo.fixed,.photo-band{background-attachment:scroll !important}
 .hero-photo{animation:none;transform:none}
 .hero .runway{transform:none !important}
+
+/* team slide (draft p2): photo left, copy right on navy */
+.team-slide{background:linear-gradient(135deg,var(--navy-deep),var(--navy) 65%,#10407f);color:#fff;padding:clamp(56px,7vw,104px) 0;position:relative;overflow:hidden}
+.team-slide::before{content:"";position:absolute;left:0;top:clamp(56px,7vw,104px);width:min(320px,30%);height:3px;background:var(--red)}
+.team-grid{display:grid;grid-template-columns:1.7fr 1fr;gap:clamp(28px,4vw,64px);align-items:center;padding-top:1.2rem}
+.team-photo{margin:0;box-shadow:0 40px 80px -30px rgba(0,0,0,.7)}
+.team-photo img{width:100%;height:auto;display:block}
+.team-copy .eyebrow{color:#ff8b9a}
+.team-copy .lead{color:#fff;font-size:1.15em}
+.team-copy p{color:rgba(255,255,255,.85)}
+@media(max-width:900px){.team-grid{grid-template-columns:1fr}}
