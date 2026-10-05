@@ -26,6 +26,7 @@ jobs:
             site-v4/package-lock.json
             site-v5/package-lock.json
             site-v6/package-lock.json
+            site-v7/package-lock.json
       - run: npm ci && npm run build
         working-directory: site
       - run: npm ci && npm run build
@@ -38,15 +39,18 @@ jobs:
         working-directory: site-v5
       - run: npm ci && npm run build
         working-directory: site-v6
-      - name: Assemble pages (v1 at root, v2-v6 under /v2 ... /v6)
+      - run: npm ci && npm run build
+        working-directory: site-v7
+      - name: Assemble pages (v1 at root, v2-v7 under /v2 ... /v7)
         run: |
-          mkdir -p _pages/v2 _pages/v3 _pages/v4 _pages/v5 _pages/v6
+          mkdir -p _pages/v2 _pages/v3 _pages/v4 _pages/v5 _pages/v6 _pages/v7
           cp -r site/dist/. _pages/
           cp -r site-v2/dist/. _pages/v2/
           cp -r site-v3/dist/. _pages/v3/
           cp -r site-v4/dist/. _pages/v4/
           cp -r site-v5/dist/. _pages/v5/
           cp -r site-v6/dist/. _pages/v6/
+          cp -r site-v7/dist/. _pages/v7/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _pages

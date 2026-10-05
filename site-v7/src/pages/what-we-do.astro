@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Slide from '../components/Slide.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { assess, partnership, icons } from '../data/content';
+---
+<Base title="What we do">
+  <Hero short img="hero-austin" pos="center 55%" eyebrow="What we do" title="Evaluate first. <em>Commit second.</em>" lead="We assess the U.S. opportunity before you invest, then stay beside you through execution." />
+
+  <Slide img="boardroom-full" pos="right center" side="left">
+    <div class="copy reveal">
+      <div class="eyebrow">Before you commit</div>
+      <h2>Three steps before you commit capital.</h2>
+      <p class="lead">Entering the U.S. market can require significant investment long before the first commercial opportunity is created. USARunway evaluates the opportunity first, helping companies determine where to focus their time, capital and resources before committing to expansion.</p>
+      <ol class="olist">
+        {assess.map((s, i) => <li><span class="n">0{i + 1}</span><div><h3>{s.t}</h3><p>{s.d}</p></div></li>)}
+      </ol>
+      <p class="callout">Designed to reduce unnecessary expansion spend and create a more focused path to opportunity.</p>
+    </div>
+  </Slide>
+
+  <Slide id="partnership" img="event-dinner" pos="center" side="right">
+    <div class="copy glass panel-r reveal">
+      <div class="eyebrow">A partnership built for execution</div>
+      <h2>We work as an extension of your team.</h2>
+      <p>Strategic guidance, U.S.-based representation and trusted relationships, combined to move opportunities forward.</p>
+      <div style="margin-top:1rem">
+        {partnership.map((p, i) => <div class="gi"><Icon name={icons.partnership[i]} size={30} /><div><h4>{p.t}</h4><p>{p.d}</p></div></div>)}
+      </div>
+    </div>
+  </Slide>
+
+  <Slide img="lunch" side="center" min="mid">
+    <div class="copy reveal">
+      <h2>Your U.S. team before you build your U.S. team.</h2>
+      <p class="lead">Strategy. Access. Execution.</p>
+    </div>
+  </Slide>
+  <CtaBand />
+</Base>

@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import PersonCard from '../components/PersonCard.astro';
+import { leaders, advisors, tags, u } from '../data/content';
+---
+<Base title="Leadership">
+  <Hero short img="boardroom" pos="center 40%" eyebrow="Leadership" title="A seasoned team with deep industry and operational experience." lead="A shared commitment to help companies expand, innovate and succeed in the United States." />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal"><div class="eyebrow">Leadership</div><h2>The people behind USARunway.</h2></div>
+      <div class="grid g4">{leaders.map(p => <PersonCard {...p} tags={tags[p.name]} />)}</div>
+    </div>
+  </section>
+
+  <section class="section mist">
+    <div class="wrap">
+      <div class="section-head reveal"><div class="eyebrow">Strategic advisors</div><h2>Experience that moves opportunity forward.</h2>
+        <p class="lead">Our leadership and strategic advisors combine industry knowledge, operational experience and established U.S. relationships to help companies navigate opportunities and turn strategy into execution.</p></div>
+      <div class="grid g3">{advisors.map(p => <PersonCard {...p} tags={tags[p.name]} />)}</div>
+    </div>
+  </section>
+  <CtaBand />
+</Base>

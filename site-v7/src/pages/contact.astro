@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Slide from '../components/Slide.astro';
+import Icon from '../components/Icon.astro';
+import { contact } from '../data/content';
+---
+<Base title="Contact">
+  <Hero short img="hero-austin" pos="center 40%" eyebrow="Contact" title="Let's build your U.S. pathway." lead="Tell us where you are today. We'll tell you honestly whether and how we can help." />
+  <Slide img="meeting-room" pos="center" side="left">
+    <div class="split" style="align-items:center">
+      <div class="reveal">
+        <h2>Contact USARunway.</h2>
+        <div class="contact-card">
+          <div class="row"><Icon name="pin" size={26} /><address style="font-style:normal">{contact.address.map(l => <div>{l}</div>)}</address></div>
+          <div class="row"><Icon name="mail" size={26} /><a href={`mailto:${contact.email}`}>{contact.email}</a></div>
+        </div>
+      </div>
+      <form class="reveal form-glass" action={`mailto:${contact.email}`} method="post" enctype="text/plain">
+        <label>Name<input name="name" required autocomplete="name" /></label>
+        <label>Company<input name="company" autocomplete="organization" /></label>
+        <label>Email<input type="email" name="email" required autocomplete="email" /></label>
+        <label>How can we help?<textarea name="message" rows="5" required></textarea></label>
+        <div><button class="btn" type="submit">Send message <span>→</span></button></div>
+      </form>
+    </div>
+  </Slide>
+</Base>
