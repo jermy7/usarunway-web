@@ -10,19 +10,6 @@ const img = (n: string) => u(`/img/${n}.jpg`);
 <Base>
   <Hero cta tagline eyebrow="U.S. market entry & growth" title="Strategy. Access. <em>Execution.</em>" lead="Helping international companies enter and expand in the United States, and helping U.S. companies accelerate growth, build strategic partnerships and strengthen operations." />
 
-  <section class="team-slide">
-    <div class="wrap team-grid">
-      <figure class="team-photo reveal"><img src={img('team')} alt="The USARunway leadership team seated in an office with the Austin skyline behind" loading="lazy" width="1672" height="941" /></figure>
-      <div class="team-copy reveal">
-        <div class="eyebrow">Leadership</div>
-        <h2>Experience behind the strategy.</h2>
-        <p class="lead">Senior expertise. One integrated U.S. team.</p>
-        <p>USARunway brings together senior executive, operational and sector expertise across healthcare, defense, aerospace, cybersecurity, supply chain and advanced technology.</p>
-        <a class="btn" href={u('/leadership/')}>Meet our team <span>→</span></a>
-      </div>
-    </div>
-  </section>
-
   <section class="stats" id="intro">
     <div class="wrap grid g4">
       {stats.map(s => (
@@ -42,6 +29,19 @@ const img = (n: string) => u(`/img/${n}.jpg`);
       <p class="callout">Designed to reduce unnecessary expansion spend and create a more focused path to opportunity.</p>
     </div>
   </Slide>
+
+  <section class="team-slide">
+    <div class="wrap team-grid">
+      <figure class="team-photo reveal"><img src={img('team')} alt="The USARunway leadership team seated in an office with the Austin skyline behind" loading="lazy" width="1672" height="941" /></figure>
+      <div class="team-copy reveal">
+        <div class="eyebrow">Leadership</div>
+        <h2>Experience behind the strategy.</h2>
+        <p class="lead">Senior expertise. One integrated U.S. team.</p>
+        <p>USARunway brings together senior executive, operational and sector expertise across healthcare, defense, aerospace, cybersecurity, supply chain and advanced technology.</p>
+        <a class="btn" href={u('/leadership/')}>Meet our team <span>→</span></a>
+      </div>
+    </div>
+  </section>
 
   <Slide img="capitol" pos="center top" side="bottom">
     <div class="reveal">
