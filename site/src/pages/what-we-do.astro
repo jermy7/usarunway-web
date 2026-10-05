@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { assess, partnership } from '../data/content';
+---
+<Base title="What we do">
+  <Hero short eyebrow="What we do" title="Before you invest in U.S. expansion, know where you are going." lead="Entering the U.S. market can require significant investment long before the first commercial opportunity is created. USARunway evaluates the opportunity first." />
+
+  <section class="section">
+    <div class="wrap split">
+      <div class="reveal">
+        <h2>Evaluate first. Commit second.</h2>
+        <p class="lead">We help companies determine where to focus their time, capital and resources before committing to expansion.</p>
+        <p class="rule-quote" style="margin-top:2rem">Designed to reduce unnecessary expansion spend and create a more focused path to opportunity.</p>
+      </div>
+      <ol class="steps reveal">
+        {assess.map((s, i) => <li><span class="n">0{i + 1}</span><div><h3>{s.t}</h3><p>{s.d}</p></div></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section mist">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">A partnership built for execution</div>
+        <h2>Real relationships. Real opportunities. Meaningful execution.</h2>
+        <p class="lead">We work as an extension of our clients' teams, combining strategic guidance, U.S.-based representation and trusted relationships to move opportunities forward.</p>
+      </div>
+      <div class="grid g3">
+        {partnership.map(p => <div class="card reveal"><h3>{p.t}</h3><p>{p.d}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="dark statement">
+    <div class="wrap reveal">
+      <h2>Your U.S. team before you build your U.S. team.</h2>
+      <p>Strategy. Access. Execution.</p>
+    </div>
+  </section>
+  <CtaBand />
+</Base>

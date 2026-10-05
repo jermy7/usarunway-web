@@ -1,0 +1,10 @@
+---
+const { name, role, bio } = Astro.props;
+const initials = name.replace(/,.*/, '').replace(/\(.*?\)|"/g, '').split(/\s+/).filter((w) => /^[A-Z]/.test(w)).map((w) => w[0]).slice(0, 2).join('');
+---
+<article class="person reveal">
+  <div class="ph portrait"><span class="initials">{initials}</span></div>
+  <h3>{name}</h3>
+  <div class="role">{role}</div>
+  <details><summary>Biography</summary><p>{bio}</p></details>
+</article>

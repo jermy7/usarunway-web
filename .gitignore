@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.astro/
+*.pdf
+draft-pages/
+customer-input.md
+Logo - *.png

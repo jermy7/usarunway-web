@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { method, pillars } from '../data/content';
+---
+<Base title="Our approach">
+  <Hero short eyebrow="Our approach" title="What clients can expect." lead="A focused, practical and collaborative engagement designed to create real opportunities and lasting value in the U.S. market." />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">The USARunway method</div>
+        <h2>From understanding the opportunity to executing the U.S. pathway.</h2>
+      </div>
+      <ol class="method reveal">
+        {method.map((m, i) => <li><div class="dot">0{i + 1}</div><h3>{m.t}</h3><p>{m.d}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section mist">
+    <div class="wrap">
+      <div class="grid g4">
+        {pillars.map(p => <div class="card reveal"><h3>{p.t}</h3><p>{p.d}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="dark statement">
+    <div class="wrap reveal">
+      <h2>We don't measure progress by the number of introductions.</h2>
+      <p>We measure it by whether the right opportunities move forward.</p>
+    </div>
+  </section>
+  <CtaBand />
+</Base>

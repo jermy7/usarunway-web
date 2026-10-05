@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { industries } from '../data/content';
+---
+<Base title="Industries">
+  <Hero short eyebrow="Industries" title="Where experience meets opportunity." lead="Sector-specific expertise for navigating complex U.S. markets." />
+
+  <section class="section">
+    <div class="wrap">
+      {industries.map((i, idx) => (
+        <article class:list={['industry', { first: idx === 0 }]} id={i.id}>
+          <div class="reveal">
+            <div class="tag">{i.n}</div>
+            <div class="eyebrow">{i.name}</div>
+            <h2>{i.title}</h2>
+          </div>
+          <div class="reveal">
+            <p class="lead">{i.lead}</p>
+            {i.body.map(p => <p>{p}</p>)}
+            {i.chips.length > 0 && (
+              <div class="chips">{i.chips.map(c => <div class="chip"><b>{c.t}</b><span>{c.d}</span></div>)}</div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+  <CtaBand />
+</Base>

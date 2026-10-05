@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import { contact } from '../data/content';
+---
+<Base title="Contact">
+  <Hero short eyebrow="Contact" title="Ready to enter, expand or scale in the U.S. market?" lead="Let's build your U.S. pathway." />
+  <section class="section">
+    <div class="wrap split">
+      <div class="reveal">
+        <h2>Start a conversation.</h2>
+        <address style="font-style:normal;font-size:1.1em;line-height:1.8">
+          {contact.address.map(l => <div>{l}</div>)}
+          <div style="margin-top:1rem"><a href={`mailto:${contact.email}`} style="color:var(--red);font-weight:600">{contact.email}</a></div>
+        </address>
+      </div>
+      <form class="reveal" action={`mailto:${contact.email}`} method="post" enctype="text/plain">
+        <label>Name<input name="name" required autocomplete="name" /></label>
+        <label>Company<input name="company" autocomplete="organization" /></label>
+        <label>Email<input type="email" name="email" required autocomplete="email" /></label>
+        <label>How can we help?<textarea name="message" rows="5" required></textarea></label>
+        <div><button class="btn" type="submit">Send message <span>→</span></button></div>
+      </form>
+    </div>
+  </section>
+</Base>
